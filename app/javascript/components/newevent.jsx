@@ -2,46 +2,71 @@ import React from 'react';
 
 
 class NewEvent extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            eventdate: null,
+            user_id: this.props.currentuser.id,
+            eventid:''
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleName = this.handleName.bind(this);
+        this.handleEventdate = this.handleEventdate.bind(this);
     }
 
+    handleName(event){
+        let input = event.target.value;
+        this.setState({name: input});
+        console.log(this.state);
+    }
+
+    handleEventdate(event){
+        console.log("in handle eventdate");
+        let input = event.target.value;
+        console.log(typeof event.target.value)
+        this.setState({eventdate: event.target.value});
+        console.log(this.state);
+    }
 
     handleSubmit(event){
         console.log("button clicked");
+        console.log(this.state);
         var reactThis = this;
+        // var statenow = this.setState({name: this.state.name, eventdate: this.state.eventdate});
 
         var responseHandler = () => {
             console.log("in response handler: " + request.body);
-              var response = JSON.parse( this.responseText );
-              // reactThis.setState({stuff: response});
+              var response = JSON.parse( this.responseHandler.responseText );
+              console.log(response);
+              // reactThis.setState({eventid: response});
         };
 
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
         request.open("POST", "http://localhost:3000/events");
-        request.send();
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send(JSON.stringify(this.state));
     }
 
 
   render() {
-    console.log("in newevent: ");
-    console.log(this.props.currentuser);
+    //console.log("in newevent: ");
+    //console.log(this.props.currentuser);
     let userid = parseInt(this.props.currentuser.id);
-    console.log(typeof userid);
+    //console.log(typeof userid);
     return (
-        <form action="http://localhost:3000/events" method="post">
+        <div>
 
                 <p>Event Name:</p>
-                <input name="name" type="text" />
+                <input name="name" type="text" onChange={(event) => {this.handleName(event)}} />
                 <p>Event Date and time</p>
-                <input name="eventdate" type="datetime-local" />
+                <input name="eventdate" type="datetime-local" onChange={(event) => {this.handleEventdate(event)}}/>
                 <input name="user_id" type="hidden" value={`${userid}`} />
 
-                <button type="submit" onSubmit={(event)=>{this.handleSubmit(event)}}>Submit</button>
+                <button onClick={(event)=>{this.handleSubmit(event)}}>Submit</button>
 
-        </form>
+        </div>
     );
   }
 }

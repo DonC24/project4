@@ -27,6 +27,7 @@ class EventsController < ApplicationController
   def create
     p current_user
     p event_params
+
     @event = Event.new(event_params)
 
 
@@ -35,8 +36,8 @@ class EventsController < ApplicationController
         @event.users << current_user
 
 
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html #{ redirect_to @event, notice: 'Event was successfully created.' }
+        format.json #{ render :show, status: :created, location: @event }
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }

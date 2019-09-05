@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NewEvent from './newevent';
+import AddUsers from './addusers';
 
 export default class App extends React.Component{
     constructor() {
@@ -13,8 +14,8 @@ export default class App extends React.Component{
 
 
   render(){
-    const node = document.getElementById('currentuser')
-    const data = JSON.parse(node.getAttribute('data'))
+    const node = document.getElementById('currentuser');
+    const data = JSON.parse(node.getAttribute('data'));
     console.log("inside app jsx " + data);
     console.log(data);
     return(<div>
