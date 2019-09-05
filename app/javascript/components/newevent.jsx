@@ -11,7 +11,6 @@ class NewEvent extends React.Component {
     handleSubmit(event){
         console.log("button clicked");
         var reactThis = this;
-        console.log(formToken);
 
         var responseHandler = () => {
             console.log("in response handler: " + request.body);
@@ -26,8 +25,11 @@ class NewEvent extends React.Component {
     }
 
 
-
   render() {
+    console.log("in newevent: ");
+    console.log(this.props.currentuser);
+    let userid = parseInt(this.props.currentuser.id);
+    console.log(typeof userid);
     return (
         <form action="http://localhost:3000/events" method="post">
 
@@ -35,7 +37,7 @@ class NewEvent extends React.Component {
                 <input name="name" type="text" />
                 <p>Event Date and time</p>
                 <input name="eventdate" type="datetime-local" />
-
+                <input name="user_id" type="hidden" value={`${userid}`} />
 
                 <button type="submit" onSubmit={(event)=>{this.handleSubmit(event)}}>Submit</button>
 
