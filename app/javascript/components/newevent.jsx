@@ -33,13 +33,20 @@ class NewEvent extends React.Component {
         console.log("button clicked");
         console.log(this.state);
         var reactThis = this;
-        // var statenow = this.setState({name: this.state.name, eventdate: this.state.eventdate});
 
-        var responseHandler = () => {
+        var responseHandler = function() {
             console.log("in response handler: " + request.body);
-              var response = JSON.parse( this.responseHandler.responseText );
-              console.log(response);
-              // reactThis.setState({eventid: response});
+
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    // console.log(request.response);
+                    // console.log(request.responseText);
+                    var response = JSON.parse( request.responseText );
+                    // console.log(response.id);
+                    reactThis.setState({eventid: response.id});
+                    // console.log(reactThis.state);
+                }
+            }
         };
 
         var request = new XMLHttpRequest();

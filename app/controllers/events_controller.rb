@@ -31,18 +31,21 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
 
-    respond_to do |format|
+
+
+    # respond_to do |format| #only need to do this if want html AND json. but since only json, no need
       if @event.save
         @event.users << current_user
 
-
-        format.html #{ redirect_to @event, notice: 'Event was successfully created.' }
-        format.json #{ render :show, status: :created, location: @event }
+        # format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        # format.json { render :show, status: :created, location: @event }
+        render :json => @event, status: :ok
       else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @event.errors, status: :unprocessable_entity }
+        render :json => @event.errors, status: :unprocessable_entity
       end
-    end
+    # end
   end
 
   # PATCH/PUT /events/1
