@@ -1,14 +1,21 @@
 import React from 'react';
 
+import AddUsers from './addusers';
 
 class NewEvent extends React.Component {
     constructor(props) {
         super(props);
+        let useremail = this.props.currentuser.email;
+        var emailarr = useremail.split("@");
+        let emaildom = emailarr[1];
+        console.log(emaildom);
         this.state = {
+            currentComponent: this.props.currentComponent,
             name: '',
             eventdate: null,
             user_id: this.props.currentuser.id,
-            eventid:''
+            eventid:'',
+            emaildom: emaildom
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleName = this.handleName.bind(this);
@@ -35,7 +42,7 @@ class NewEvent extends React.Component {
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler: " + request.body);
+            console.log("in response handler");
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
@@ -45,6 +52,7 @@ class NewEvent extends React.Component {
                     // console.log(response.id);
                     reactThis.setState({eventid: response.id});
                     // console.log(reactThis.state);
+                    reactThis.props.changeComponent("page2");
                 }
             }
         };
@@ -60,19 +68,21 @@ class NewEvent extends React.Component {
   render() {
     //console.log("in newevent: ");
     //console.log(this.props.currentuser);
-    let userid = parseInt(this.props.currentuser.id);
     //console.log(typeof userid);
+    let main = "";
+    if(this.state.currentComponent != "page1"){
+        main = <AddUsers eventid={this.state.eventid} emaildom={this.state.emaildom} />
+    }
+
+
     return (
         <div>
-
-                <p>Event Name:</p>
-                <input name="name" type="text" onChange={(event) => {this.handleName(event)}} />
-                <p>Event Date and time</p>
-                <input name="eventdate" type="datetime-local" onChange={(event) => {this.handleEventdate(event)}}/>
-                <input name="user_id" type="hidden" value={`${userid}`} />
-
-                <button onClick={(event)=>{this.handleSubmit(event)}}>Submit</button>
-
+            <p>Event Name:</p>
+            <input name="name" type="text" onChange={(event) => {this.handleName(event)}} />
+            <p>Event Date and time</p>
+            <input name="eventdate" type="datetime-local" onChange={(event) => {this.handleEventdate(event)}}/>
+            <button onClick={(event)=>{this.handleSubmit(event)}}>Submit</button>
+            {main}
         </div>
     );
   }

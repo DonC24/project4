@@ -30,10 +30,7 @@ class EventsController < ApplicationController
 
     @event = Event.new(event_params)
 
-
-
-
-    # respond_to do |format| #only need to do this if want html AND json. but since only json, no need
+    # respond_to do |format| #only need to do this if want html AND json. but since only json, no need to "do ||"
       if @event.save
         @event.users << current_user
 
