@@ -13,12 +13,14 @@ export default class App extends React.Component{
             eventdate: null,
             user_id: null,
             eventid:'',
-            emaildom: null
+            emaildom: null,
+            allusers: []
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleName = this.handleName.bind(this);
         this.handleEventdate = this.handleEventdate.bind(this);
+        this.handleUsersSubmit = this.handleUsersSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -31,8 +33,18 @@ export default class App extends React.Component{
         var emailarr = useremail.split("@");
         let emaildom = emailarr[1];
         // console.log(emaildom);
-        this.setState({ user_id: userid, emaildom: emaildom});
+
         // console.log(this.state);
+
+        const allusersdiv = document.getElementById('allusers');
+        var allusersjson = JSON.parse(allusersdiv.getAttribute('data'));
+        console.log(allusersjson);
+        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson});
+        console.log("this state allusers");
+        console.log(this.state);
+
+        let alluserslist = this.state.allusers
+
     }
 
     changeComponent(input){
@@ -76,6 +88,33 @@ export default class App extends React.Component{
                 }
             }
         };
+        var request = new XMLHttpRequest();
+        request.addEventListener("load", responseHandler);
+        request.open("POST", "http://localhost:3000/events");
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send(JSON.stringify(this.state));
+    }
+
+    handleUsersSubmit(event){
+        console.log("button clicked");
+        console.log(this.state);
+        var reactThis = this;
+
+        var responseHandler = function() {
+            console.log("in response handler: " + request.body);
+
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    // console.log(request.response);
+                    // console.log(request.responseText);
+                    var response = JSON.parse( request.responseText );
+                    // console.log(response.id);
+                    reactThis.setState({eventid: response.id});
+                    // console.log(reactThis.state);
+                    reactThis.changeComponent("page3");
+                }
+            }
+        };
 
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
@@ -85,20 +124,21 @@ export default class App extends React.Component{
     }
 
 
-  render(){
 
+
+  render(){
+    console.log("in render");
 
     let main = "";
     if (this.state.currentComponent === "page1"){
         main = <NewEvent
-
                 handleName={this.handleName}
                 handleEventdate={this.handleEventdate}
                 handleEventSubmit={this.handleEventSubmit}
                 changeComponent={this.changeComponent}>
             </NewEvent>
     } else if(this.state.currentComponent === "page2"){
-        main = <AddUsers eventid={this.state.eventid} emaildom={this.state.emaildom} />
+        main = <AddUsers handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
     }
 
 
