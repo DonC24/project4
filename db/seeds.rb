@@ -15,6 +15,6 @@ User.create :name => "James", :email => "james@abc.com", :password => "pwjames"
 User.create :name => "Alicia", :email => "alicia@abc.com", :password => "pwalicia"
 User.create :name => "Michael", :email => "michael@abc.com", :password => "pwmichael"
 User.create :name => "Kenny", :email => "kenny@abc.com", :password => "pwkenny"
-User.create :name => "Ben", :email => "ben@abc.com", :password => "pwben"
+User.create :name => "Benji", :email => "benji@abc.com", :password => "pwbenji"
 
 p "USERS HAVE BEEN SEEDED"

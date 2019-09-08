@@ -1,13 +1,10 @@
 import React from 'react';
 
-class AddUsers extends React.Component {
+class Matching extends React.Component {
     constructor(props) {
         super(props);
 
     }
-
-
-
 
 
   render() {
@@ -46,4 +43,4 @@ class AddUsers extends React.Component {
 }
 
 
-export default AddUsers;
+export default Matching;

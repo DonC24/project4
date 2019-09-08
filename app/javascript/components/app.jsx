@@ -14,13 +14,15 @@ export default class App extends React.Component{
             user_id: null,
             eventid:'',
             emaildom: null,
-            allusers: []
+            allusers: [],
+            user_ids: []
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleName = this.handleName.bind(this);
         this.handleEventdate = this.handleEventdate.bind(this);
         this.handleUsersSubmit = this.handleUsersSubmit.bind(this);
+        this.handleCheckBox = this.handleCheckBox.bind(this);
     }
 
     componentDidMount(){
@@ -43,7 +45,8 @@ export default class App extends React.Component{
         console.log("this state allusers");
         console.log(this.state);
 
-        let alluserslist = this.state.allusers
+        let alluserslist = this.state.allusers;
+
 
     }
 
@@ -109,7 +112,6 @@ export default class App extends React.Component{
                     // console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
-                    reactThis.setState({eventid: response.id});
                     // console.log(reactThis.state);
                     reactThis.changeComponent("page3");
                 }
@@ -118,11 +120,31 @@ export default class App extends React.Component{
 
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("POST", "http://localhost:3000/events");
+        request.open("PATCH", `http://localhost:3000/events/${this.state.eventid}`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request.send(JSON.stringify(this.state));
+        var obj = {user_ids: this.state.user_ids};
+        request.send(JSON.stringify(obj));
     }
 
+
+    handleCheckBox(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+
+        const newSelection = event.target.value;
+        let newSelectionArray;
+        // console.log("handlecheckbox");
+        // console.log(event.target);
+
+        if(this.state.user_ids.includes(newSelection)) {
+          newSelectionArray = this.state.user_ids.filter(s => s !== newSelection)
+        } else {
+          newSelectionArray = [...this.state.user_ids, newSelection];
+        }
+
+        this.setState( prevState => ({ user_ids: newSelectionArray })
+        )
+    }
 
 
 
@@ -138,13 +160,16 @@ export default class App extends React.Component{
                 changeComponent={this.changeComponent}>
             </NewEvent>
     } else if(this.state.currentComponent === "page2"){
-        main = <AddUsers handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
+        main = <AddUsers handleCheckBox={this.handleCheckBox} handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
+    } else if(this.state.currentComponent === "page3"){
+
     }
 
 
     return(<div>
             <h1>APPPPPPP!</h1>
             {main}
+
           </div>);
   }
 }
