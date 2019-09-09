@@ -19,7 +19,9 @@ export default class App extends React.Component{
             emaildom: null,
             allusers: [],
             user_ids: [],
-            pairs: []
+            pairs: [],
+            upcomingevents: [],
+            pastevents: []
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -43,18 +45,26 @@ export default class App extends React.Component{
         let emaildom = emailarr[1];
         // console.log(emaildom);
 
-        // console.log(this.state);
-
         const allusersdiv = document.getElementById('allusers');
         var allusersjson = JSON.parse(allusersdiv.getAttribute('data'));
-        console.log(allusersjson);
-        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson});
+        // console.log(allusersjson);
+
         // console.log("this state allusers");
-        // console.log(this.state);
 
         let alluserslist = this.state.allusers;
 
+        const upcomingeventsdiv = document.getElementById('upcomingevents');
+        const upcomingeventsjson = JSON.parse(upcomingeventsdiv.getAttribute('data'));
+        // console.log("upcoming events");
+        // console.log(upcomingeventsjson);
 
+        const pasteventsdiv = document.getElementById('pastevents');
+        const pasteventsjson = JSON.parse(pasteventsdiv.getAttribute('data'));
+        // console.log("past events");
+        // console.log(pasteventsjson);
+
+        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson, upcomingevents: upcomingeventsjson, pastevents: pasteventsjson});
+        // console.log(this.state);
     }
 
     changeComponent(input){
@@ -211,7 +221,7 @@ export default class App extends React.Component{
 
     let main = "";
     if (this.state.currentComponent === "page1"){
-        main = <Dashboard handleCreateEvent={this.handleCreateEvent} />
+        main = <Dashboard handleCreateEvent={this.handleCreateEvent} upcomingevents={this.state.upcomingevents pastevents={this.state.pastevents}} />
     } else if (this.state.currentComponent === "page2"){
         main = <NewEvent
                 handleName={this.handleName}

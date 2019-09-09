@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
     return (
         <div>
             <button onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
+
         </div>
     );
   }

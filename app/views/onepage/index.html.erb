@@ -12,4 +12,15 @@
   data: @users.to_json do %>
 <% end %>
 
+<%# p @upcomingevents %>
+<%= content_tag :div,
+  id: "upcomingevents",
+  data: @upcomingevents.to_json do %>
+<% end %>
+
+<%= content_tag :div,
+  id: "pastevents",
+  data: @pastevents.to_json do %>
+<% end %>
+
 <%= javascript_pack_tag 'hello_react' %>

@@ -28,7 +28,7 @@ class MatchesController < ApplicationController
     p params
     p params[:sender_ids]
 
-    params[:sender_ids].each_with_index do |sender, i|
+    params[:sender_ids].each_with_index do |sender, i| #i stands for index
         # p sender_id: sender, recipient_id: params[:recipient_ids][i], event_id: params[:event_ids][i]
       @match = Match.new(sender_id: sender, recipient_id: params[:recipient_ids][i], event_id: params[:event_ids][i])
       @match.save
