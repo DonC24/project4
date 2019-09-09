@@ -53,11 +53,10 @@ class Matching extends React.Component {
         let pairslist = pairs.map(apair => {
             console.log(apair);
             return(
-                        <tr>
-                            <td>{`${apair[0].name}`}</td>
-                            <td>{`${apair[1].name}`}</td>
-                        </tr>
-
+                    <tr>
+                        <td>{`${apair[0].name} (${apair[0].email})`}</td>
+                        <td>{`${apair[1].name} (${apair[0].email})`}</td>
+                    </tr>
                 )
         })
 

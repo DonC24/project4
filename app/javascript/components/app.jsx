@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Dashboard from './dashboard';
 import NewEvent from './newevent';
 import AddUsers from './addusers';
 import Matching from './matching';
@@ -21,6 +22,7 @@ export default class App extends React.Component{
             pairs: []
         };
         this.changeComponent = this.changeComponent.bind(this);
+        this.handleCreateEvent = this.handleCreateEvent.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleName = this.handleName.bind(this);
         this.handleNotes = this.handleNotes.bind(this);
@@ -61,6 +63,10 @@ export default class App extends React.Component{
         this.setState({currentComponent: input});
     }
 
+    handleCreateEvent(event){
+        this.changeComponent("page2")
+    }
+
 
     handleName(event){
         let input = event.target.value;
@@ -98,7 +104,7 @@ export default class App extends React.Component{
                     // console.log(response.id);
                     reactThis.setState({eventid: response.id});
                     // console.log(reactThis.state);
-                    reactThis.changeComponent("page2");
+                    reactThis.changeComponent("page3");
                 }
             }
         };
@@ -124,7 +130,7 @@ export default class App extends React.Component{
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
                     // console.log(reactThis.state);
-                    reactThis.changeComponent("page3");
+                    reactThis.changeComponent("page4");
                 }
             }
         };
@@ -183,7 +189,7 @@ export default class App extends React.Component{
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
                     // console.log(reactThis.state);
-                    reactThis.changeComponent("page4");
+                    reactThis.changeComponent("page5");
                 }
             }
         };
@@ -205,6 +211,8 @@ export default class App extends React.Component{
 
     let main = "";
     if (this.state.currentComponent === "page1"){
+        main = <Dashboard handleCreateEvent={this.handleCreateEvent} />
+    } else if (this.state.currentComponent === "page2"){
         main = <NewEvent
                 handleName={this.handleName}
                 handleNotes={this.handleNotes}
@@ -212,10 +220,10 @@ export default class App extends React.Component{
                 handleEventSubmit={this.handleEventSubmit}
                 changeComponent={this.changeComponent}>
             </NewEvent>
-    } else if(this.state.currentComponent === "page2"){
-        main = <AddUsers handleCheckBox={this.handleCheckBox} handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
     } else if(this.state.currentComponent === "page3"){
-        main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData}/>
+        main = <AddUsers handleCheckBox={this.handleCheckBox} handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
+    } else if(this.state.currentComponent === "page4"){
+        main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     }
 
 
