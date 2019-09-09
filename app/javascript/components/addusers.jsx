@@ -3,11 +3,7 @@ import React from 'react';
 class AddUsers extends React.Component {
     constructor(props) {
         super(props);
-
     }
-
-
-
 
 
   render() {
@@ -23,7 +19,7 @@ class AddUsers extends React.Component {
                             <input className="form-checkbox"
                                   id = {`${oneuser.name}`}
                                   name={`${oneuser.name}`}
-                                  onChange={(e)=>{this.props.handleCheckBox(e)}}
+                                  onChange={(event)=>{this.props.handleCheckBox(event)}}
                                   value={`${oneuser.id}`}
                                   type="checkbox" />
                             </label>

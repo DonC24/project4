@@ -3,40 +3,74 @@ import React from 'react';
 class Matching extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            pairs: [],
+        }
 
     }
 
+    componentDidMount(){
+        this.santamatch();
 
-  render() {
+    }
 
-    let alluserslist = this.props.allusers;
-    var ReactThis = this;
+    santamatch(){
+        let selectedpeoplearr = [];
+        let allusers = this.props.allusers;
+        let participants = this.props.user_ids;
+        for(let i = 0; i < allusers.length; i++){
+            for(let j=0; j < participants.length; j++){
+                if(allusers[i].id === parseInt(participants[j])){
+                    // console.log(allusers[i].id === parseInt(participants[j]));
+                    // console.log(allusers[i]);
+                    selectedpeoplearr.push(allusers[i]);
+                }
+            }
+        }
+        console.log(selectedpeoplearr);
 
-    let userslist = alluserslist.map(oneuser => {
-        console.log(typeof oneuser.id);
-                      return(
-                        <div>
-                            <label htmlFor={`${oneuser.name}`}>{`${oneuser.name}`}
-                            <input className="form-checkbox"
-                                  id = {`${oneuser.name}`}
-                                  name={`${oneuser.name}`}
-                                  onChange={(e)=>{this.props.handleCheckBox(e)}}
-                                  value={`${oneuser.id}`}
-                                  type="checkbox" />
-                            </label>
-                        </div>
-                        )
-                  });
+        let pairs = [];
+        if (selectedpeoplearr.length > 1){
+            selectedpeoplearr.sort(() => 0.5 - Math.random());
+            pairs.push([selectedpeoplearr[selectedpeoplearr.length - 1], selectedpeoplearr[0]]);
+            for (let i = 1; i < selectedpeoplearr.length; i++){
+                pairs.push([selectedpeoplearr[i - 1], selectedpeoplearr[i]]);
+            }
+        }
+        console.log(pairs);
+        this.setState({pairs: pairs}, function() {
+            this.wee()
+        })
+    }
+
+    wee() {
+        this.props.sendData(this.state.pairs);
+    }
+
+
+    render() {
+        let pairs = this.state.pairs;
+        let pairslist = pairs.map(apair => {
+            console.log(apair);
+            return(
+                        <tr>
+                            <td>{`${apair[0].name}`}</td>
+                            <td>{`${apair[1].name}`}</td>
+                        </tr>
+
+                )
+        })
 
     return (
         <div>
-
-                <p>Add Participants:</p>
-                <label className="form-label">Add participants</label>
-                    <div className="checkbox-group">
-                        {userslist}
-                    </div>
-                <button onClick={(event)=>{this.props.handleUsersSubmit(event)}}>Submit Participants</button>
+            <h2>{this.props.eventid}</h2>
+                <table>
+                    <th>Gifter</th>
+                    <th>Recipient</th>
+                    <tbody>
+                        {pairslist}
+                    </tbody>
+                </table>
         </div>
     );
   }

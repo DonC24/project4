@@ -16,6 +16,8 @@ class NewEvent extends React.Component {
         <div>
             <p>Event Name:</p>
             <input name="name" type="text" onChange={(event) => {this.props.handleName(event)}} />
+            <p>Notes:</p>
+            <input name="notes" type="text" placeholder="Notes about the event (e.g. theme, budget)" onChange={(event) => {this.props.handleNotes(event)}} />
             <p>Event Date and time:</p>
             <input name="eventdate" type="datetime-local" onChange={(event) => {this.props.handleEventdate(event)}}/>
             <button onClick={(event) => {this.props.handleEventSubmit(event)}}>Submit</button>
