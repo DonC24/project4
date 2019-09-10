@@ -16,8 +16,8 @@ class OnepageController < ApplicationController
       # date = Date.parse(anevent.eventdate)
 
       eventdate = anevent.eventdate
-      date = eventdate.to_datetime.utc
-      now = DateTime.now.utc
+      date = eventdate.to_datetime
+      now = DateTime.now
       if now < date
         @upcomingevents << anevent
       else

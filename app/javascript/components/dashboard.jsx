@@ -16,14 +16,14 @@ class Dashboard extends React.Component {
     let matched = this.props.matchedperson;
 
     let upcominglist = upcomingevents.map(anevent => {
-         console.log(anevent);
+        // console.log(anevent);
         // console.log("matched");
         // console.log(matched);
         let matchpersonevent = matched.find(amatch => amatch.event_id === anevent.id);
         // console.log(matchpersonevent)
         let person = allusers.find(aperson => aperson.id === matchpersonevent.recipient_id);
         // console.log(person);
-        let formatteddate = Moment(anevent.eventdate).format("dddd, DD MMM YY, h:mm a");
+        let formatteddate = Moment(anevent.eventdate).utc().format("dddd, DD MMM YY, h:mm a");
         let seematched = "";
         if(currentuser === anevent.user_id){
             seematched = <a href="#">See list of matched persons</a>
@@ -41,6 +41,8 @@ class Dashboard extends React.Component {
                         <p className="card-text">The recipient of your gift is: <br />
                         {person.name} ({person.email})</p>
                         <p className="card-text">{seematched}</p>
+                    </div>
+                    <div className="card-footer">
                         <button value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
                     </div>
                 </div>
@@ -55,11 +57,13 @@ class Dashboard extends React.Component {
         // console.log(matchpersonevent)
         let person = allusers.find(aperson => aperson.id === matchpersonevent.recipient_id);
         // console.log(person);
-        let formatteddate = Moment(anevent.eventdate).format("dddd, DD MMM YY, h:mm a");
+        let formatteddate = Moment(anevent.eventdate).utc().format("dddd, DD MMM YY, h:mm a");
         let seematched = "";
         if(currentuser === anevent.user_id){
             seematched = <a href="#">See list of matched persons</a>
         }
+        let thiseventid = anevent.id;
+        console.log(thiseventid);
         return(
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 cards">
                 <div className="card" style={{width: 18 + "rem"}}>
@@ -68,9 +72,12 @@ class Dashboard extends React.Component {
                         <h6 className="card-subtitle mb-2 text-muted">{formatteddate}</h6>
                         <p className="card-text">Notes about this event: <br />
                         {anevent.notes}</p>
-                        <p className="card-text">The recipient of your gift is:<br />
+                        <p className="card-text">The recipient of your gift is: <br />
                         {person.name} ({person.email})</p>
                         <p className="card-text">{seematched}</p>
+                    </div>
+                    <div className="card-footer">
+                        <button value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
                     </div>
                 </div>
             </div>

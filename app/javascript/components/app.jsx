@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import Dashboard from './dashboard';
 import NewEvent from './newevent';
 import AddUsers from './addusers';
@@ -101,8 +102,8 @@ export default class App extends React.Component{
     handleEventdate(event){
         console.log("in handle eventdate");
         let input = event.target.value;
-        console.log(typeof event.target.value)
-        this.setState({eventdate: event.target.value});
+        // console.log(typeof event.target.value)
+        this.setState({eventdate: input});
         console.log(this.state);
     }
 
@@ -197,9 +198,9 @@ export default class App extends React.Component{
                     console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
-                    //reactThis.setState({eventid: response.id});
+                    reactThis.setState({eventid: response.id, eventdate: response.eventdate, notes: response.notes});
                     // console.log(reactThis.state);
-                    // reactThis.changeComponent("page5");
+                     reactThis.changeComponent("page5");
                 }
             }
         };
@@ -280,7 +281,7 @@ export default class App extends React.Component{
     } else if(this.state.currentComponent === "page4"){
         main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     } else if(this.state.currentComponent === "page5"){
-        main = <Eventdetails />
+        main = <Eventdetails eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} />
     }
 
 

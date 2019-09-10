@@ -34,7 +34,7 @@ class EventsController < ApplicationController
 
     # respond_to do |format| #only need to do this if want html AND json. but since only json, no need to "do ||"
       if @event.save
-        @event.users << current_user
+         # @event.users << current_user
 
         # format.html { redirect_to @event, notice: 'Event was successfully created.' }
         # format.json { render :show, status: :created, location: @event }
