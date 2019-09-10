@@ -21,7 +21,8 @@ export default class App extends React.Component{
             user_ids: [],
             pairs: [],
             upcomingevents: [],
-            pastevents: []
+            pastevents: [],
+            matchedperson: []
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -63,7 +64,12 @@ export default class App extends React.Component{
         // console.log("past events");
         // console.log(pasteventsjson);
 
-        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson, upcomingevents: upcomingeventsjson, pastevents: pasteventsjson});
+        const matchedpersondiv = document.getElementById('matchedperson');
+        const matchedpersonjson = JSON.parse(matchedpersondiv.getAttribute('data'));
+        // console.log("Matched person");
+        // console.log(matchedpersonjson);
+
+        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson, upcomingevents: upcomingeventsjson, pastevents: pasteventsjson, matchedperson: matchedpersonjson});
         // console.log(this.state);
     }
 
@@ -221,7 +227,14 @@ export default class App extends React.Component{
 
     let main = "";
     if (this.state.currentComponent === "page1"){
-        main = <Dashboard handleCreateEvent={this.handleCreateEvent} upcomingevents={this.state.upcomingevents pastevents={this.state.pastevents}} />
+        main = <Dashboard
+        currentuser={this.state.user_id}
+        handleCreateEvent={this.handleCreateEvent}
+        upcomingevents={this.state.upcomingevents}
+        pastevents={this.state.pastevents}
+        matchedperson={this.state.matchedperson}
+        allusers={this.state.allusers}
+         />
     } else if (this.state.currentComponent === "page2"){
         main = <NewEvent
                 handleName={this.handleName}
@@ -238,7 +251,7 @@ export default class App extends React.Component{
 
 
     return(<div>
-            <h1>APPPPPPP!</h1>
+            <h1>Secret Santa</h1>
             {main}
 
           </div>);

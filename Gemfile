@@ -62,5 +62,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-
-gem 'momentjs-rails', '~> 2.20', '>= 2.20.1'

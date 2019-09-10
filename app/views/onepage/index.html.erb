@@ -23,4 +23,9 @@
   data: @pastevents.to_json do %>
 <% end %>
 
+<%= content_tag :div,
+  id: "matchedperson",
+  data: @current_user.sent_matches.to_json do %>
+<% end %>
+
 <%= javascript_pack_tag 'hello_react' %>
