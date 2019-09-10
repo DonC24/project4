@@ -4,6 +4,7 @@ import Dashboard from './dashboard';
 import NewEvent from './newevent';
 import AddUsers from './addusers';
 import Matching from './matching';
+import Eventdetails from './eventdetails';
 
 export default class App extends React.Component{
     constructor() {
@@ -33,6 +34,7 @@ export default class App extends React.Component{
         this.handleUsersSubmit = this.handleUsersSubmit.bind(this);
         this.handleCheckBox = this.handleCheckBox.bind(this);
         this.getData = this.getData.bind(this);
+        this.handleDetailsClick = this.handleDetailsClick.bind(this);
     }
 
     componentDidMount(){
@@ -179,6 +181,35 @@ export default class App extends React.Component{
         )
     }
 
+    handleDetailsClick(event){
+        console.log("button clicked");
+        // console.log(this.state);
+        console.log(event.target.value);
+        let thiseventid = event.target.value;
+        var reactThis = this;
+
+        var responseHandler = function() {
+            console.log("in response handler");
+
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    // console.log(request.response);
+                    console.log(request.responseText);
+                    var response = JSON.parse( request.responseText );
+                    //     console.log(response);
+                    //reactThis.setState({eventid: response.id});
+                    // console.log(reactThis.state);
+                    // reactThis.changeComponent("page5");
+                }
+            }
+        };
+        var request = new XMLHttpRequest();
+        request.addEventListener("load", responseHandler);
+        request.open("GET", `http://localhost:3000/events/${thiseventid}`);
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send();
+    }
+
     getData(val) {
         console.log("in");
         console.log("pairs: ", val);
@@ -234,6 +265,7 @@ export default class App extends React.Component{
         pastevents={this.state.pastevents}
         matchedperson={this.state.matchedperson}
         allusers={this.state.allusers}
+        handleDetailsClick={this.handleDetailsClick}
          />
     } else if (this.state.currentComponent === "page2"){
         main = <NewEvent
@@ -247,13 +279,14 @@ export default class App extends React.Component{
         main = <AddUsers handleCheckBox={this.handleCheckBox} handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
     } else if(this.state.currentComponent === "page4"){
         main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
+    } else if(this.state.currentComponent === "page5"){
+        main = <Eventdetails />
     }
 
 
     return(<div>
             <h1>Secret Santa</h1>
             {main}
-
           </div>);
   }
 }
