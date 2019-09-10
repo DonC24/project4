@@ -55,7 +55,7 @@ class Matching extends React.Component {
             return(
                     <tr>
                         <td>{`${apair[0].name} (${apair[0].email})`}</td>
-                        <td>{`${apair[1].name} (${apair[0].email})`}</td>
+                        <td>{`${apair[1].name} (${apair[1].email})`}</td>
                     </tr>
                 )
         })
