@@ -25,11 +25,13 @@ class Dashboard extends React.Component {
         // console.log(person);
         let formatteddate = Moment(anevent.eventdate).utc().format("dddd, DD MMM YY, h:mm a");
         let seematched = "";
-        if(currentuser === anevent.user_id){
-            seematched = <a href="#">See list of matched persons</a>
-        }
         let thiseventid = anevent.id;
         console.log(thiseventid);
+
+        if(currentuser === anevent.user_id){
+            seematched = <button value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
+        }
+
         return(
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 cards">
                 <div className="card" style={{width: 18 + "rem"}}>
@@ -59,11 +61,13 @@ class Dashboard extends React.Component {
         // console.log(person);
         let formatteddate = Moment(anevent.eventdate).utc().format("dddd, DD MMM YY, h:mm a");
         let seematched = "";
-        if(currentuser === anevent.user_id){
-            seematched = <a href="#">See list of matched persons</a>
-        }
+
         let thiseventid = anevent.id;
         console.log(thiseventid);
+
+        if(currentuser === anevent.user_id){
+            seematched = <button value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
+        }
         return(
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 cards">
                 <div className="card" style={{width: 18 + "rem"}}>
