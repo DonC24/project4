@@ -6,6 +6,7 @@ import NewEvent from './newevent';
 import AddUsers from './addusers';
 import Matching from './matching';
 import Eventdetails from './eventdetails';
+import Allpairs from './allpairs';
 
 export default class App extends React.Component{
     constructor() {
@@ -24,7 +25,8 @@ export default class App extends React.Component{
             pairs: [],
             upcomingevents: [],
             pastevents: [],
-            matchedperson: []
+            matchedperson: [],
+            allpairs: []
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -199,7 +201,7 @@ export default class App extends React.Component{
                     console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
-                    reactThis.setState({eventid: response.id, eventdate: response.eventdate, notes: response.notes});
+                    reactThis.setState({name: response.name, eventid: response.id, eventdate: response.eventdate, notes: response.notes});
                     // console.log(reactThis.state);
                      reactThis.changeComponent("page5");
                 }
@@ -228,9 +230,9 @@ export default class App extends React.Component{
                     console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
-                    //reactThis.setState({eventid: response.id, eventdate: response.eventdate, notes: response.notes});
+                    reactThis.setState({allpairs: response.matches, name: response.event.name, eventid: response.event.id, eventdate: response.event.eventdate, notes: response.event.notes});
                     // console.log(reactThis.state);
-                    //reactThis.changeComponent("page5");
+                    reactThis.changeComponent("page6");
                 }
             }
         };
@@ -313,6 +315,8 @@ export default class App extends React.Component{
         main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     } else if(this.state.currentComponent === "page5"){
         main = <Eventdetails eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} />
+    } else if(this.state.currentComponent === "page6"){
+        main = <Allpairs allpairs={this.state.allpairs} eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} />
     }
 
 

@@ -13,7 +13,8 @@ class MatchesController < ApplicationController
     p params
 
     @matches = Match.all.where(event_id: params[:id])
-    render :json => @matches, status: :ok
+    @event = Event.find(params[:id])
+    render :json => {:matches => @matches, :event => @event}, status: :ok
   end
 
   # GET /matches/new

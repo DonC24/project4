@@ -26,7 +26,6 @@ class OnepageController < ApplicationController
     end
 
     @current_user.sent_matches
-    # p upcomingevents
-    # p pastevents
+
   end
 end

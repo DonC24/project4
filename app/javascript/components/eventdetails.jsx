@@ -24,12 +24,15 @@ class Eventdetails extends React.Component {
     let momtdate = Moment(this.props.eventdate);
     console.log(momtdate);
     let duration = ""
+    let durtxt = "";
     if (now < momtdate){
         console.log("event is after now");
         duration = Moment(momtdate).fromNow();
+        durtxt = `is ${duration}`;
     } else {
         console.log("event has passed");
         duration = Moment(momtdate).fromNow();
+        durtxt = `was ${duration}`;
     }
 
 
@@ -37,10 +40,10 @@ class Eventdetails extends React.Component {
         <div>
             <h2>Event Details</h2>
             <h3>{this.props.eventname}</h3>
-            <h4>{formatteddate} {duration}</h4>
+            <h4>{formatteddate}</h4>
+            <h5>This event {durtxt}</h5>
+            <h6>Notes:</h6>
             <p>{this.props.eventnotes}</p>
-
-
         </div>
     );
   }
