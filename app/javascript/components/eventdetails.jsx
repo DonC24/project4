@@ -8,6 +8,7 @@ class Eventdetails extends React.Component {
         super(props);
     }
 
+
   render() {
     console.log(this.props);
 
@@ -43,9 +44,9 @@ class Eventdetails extends React.Component {
     let hasitem = myitem.find(anitem => anitem.user_id === currentuser);
     console.log(hasitem);
     if(hasitem === undefined ){
-        show = <div>
-                <input name="item" type="text" onChange={(event) => {this.props.handleWishItem(event)}} />
-                <button value={currenteventid} onClick={(event) => {this.props.handleWishSubmit(event)}}>Submit</button>
+        show = <div className="col-5">
+                <input className="form-control" name="item" type="text" onChange={(event) => {this.props.handleWishItem(event)}} />
+                <button className="btn btn-primary" value={currenteventid} onClick={(event) => {this.props.handleWishSubmit(event)}}>Submit</button>
             </div>
     } else {
         show = <div> Your wishlist item is {hasitem.item} </div>

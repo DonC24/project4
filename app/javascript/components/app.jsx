@@ -133,13 +133,13 @@ export default class App extends React.Component{
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     // console.log(request.response);
-                     console.log(request.responseText);
+                    console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
-                    reactThis.setState({item: ''});
+                    let newarray = [...reactThis.state.myitem, response];
+                    reactThis.setState({myitem: newarray});
                     // console.log(reactThis.state);
                     // reactThis.changeComponent("page3");
-
                 }
             }
         };
@@ -353,7 +353,7 @@ export default class App extends React.Component{
     } else if(this.state.currentComponent === "page3"){
         main = <AddUsers handleCheckBox={this.handleCheckBox} handleUsersSubmit={this.handleUsersSubmit} eventid={this.state.eventid} allusers={this.state.allusers} />
     } else if(this.state.currentComponent === "page4"){
-        main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
+        main = <Matching eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     } else if(this.state.currentComponent === "page5"){
         main = <Eventdetails currentuserid={this.state.user_id} eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} handleWishItem={this.handleWishItem} handleWishSubmit={this.handleWishSubmit} myitem={this.state.myitem} />
     } else if(this.state.currentComponent === "page6"){
@@ -361,8 +361,8 @@ export default class App extends React.Component{
     }
 
 
-    return(<div>
-            <h1>Secret Santa</h1>
+    return(<div className="mainwrap">
+
             {main}
           </div>);
   }

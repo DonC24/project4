@@ -16,5 +16,10 @@ User.create :name => "Alicia", :email => "alicia@abc.com", :password => "pwalici
 User.create :name => "Michael", :email => "michael@abc.com", :password => "pwmichael"
 User.create :name => "Kenny", :email => "kenny@abc.com", :password => "pwkenny"
 User.create :name => "Benji", :email => "benji@abc.com", :password => "pwbenji"
-
+User.create :name => "Gerald", :email => "gerald@xyz.com", :password => "pwgerald"
+User.create :name => "Vera", :email => "vera@xyz.com", :password => "pwvera"
+User.create :name => "John", :email => "john@xyz.com", :password => "pwjohn"
+User.create :name => "Jane", :email => "jane@xyz.com", :password => "pwjane"
+User.create :name => "Mark", :email => "mark@xyz.com", :password => "pwmark"
+User.create :name => "Sunny", :email => "sunny@xyz.com", :password => "pwsunny"
 p "USERS HAVE BEEN SEEDED"

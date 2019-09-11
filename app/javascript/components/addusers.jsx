@@ -14,28 +14,26 @@ class AddUsers extends React.Component {
     let userslist = alluserslist.map(oneuser => {
         console.log(typeof oneuser.id);
                       return(
-                        <div>
-                            <label htmlFor={`${oneuser.name}`}>{`${oneuser.name}`}
-                            <input className="form-checkbox"
+                        <div class="form-group form-check">
+
+                            <input className="form-check-input"
                                   id = {`${oneuser.name}`}
                                   name={`${oneuser.name}`}
                                   onChange={(event)=>{this.props.handleCheckBox(event)}}
                                   value={`${oneuser.id}`}
                                   type="checkbox" />
-                            </label>
+                            <label className="form-check-label" htmlFor={`${oneuser.name}`}>{`${oneuser.name}`}</label>
                         </div>
                         )
                   });
 
     return (
-        <div>
-
-                <p>Add Participants:</p>
-                <label className="form-label">Add participants</label>
+        <div className="form-group col-6">
+                <h4>Add participants</h4>
                     <div className="checkbox-group">
                         {userslist}
                     </div>
-                <button onClick={(event)=>{this.props.handleUsersSubmit(event)}}>Submit Participants</button>
+                <button className="btn btn-primary" onClick={(event)=>{this.props.handleUsersSubmit(event)}}>Submit Participants</button>
         </div>
     );
   }

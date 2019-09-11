@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
         console.log(thiseventid);
 
         if(currentuser === anevent.user_id){
-            seematched = <button value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
+            seematched = <button className="btn btn-outline-info btn-sm" value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
         }
 
         return(
@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
                         <p className="card-text">{seematched}</p>
                     </div>
                     <div className="card-footer">
-                        <button value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
+                        <button className="btn btn-primary" value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
         console.log(thiseventid);
 
         if(currentuser === anevent.user_id){
-            seematched = <button value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
+            seematched = <button className="btn btn-outline-info btn-sm" value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
         }
         return(
             <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 cards">
@@ -81,7 +81,7 @@ class Dashboard extends React.Component {
                         <p className="card-text">{seematched}</p>
                     </div>
                     <div className="card-footer">
-                        <button value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
+                        <button className="btn btn-primary" value={`${thiseventid}`} onClick={(event)=>{this.props.handleDetailsClick(event)}}>Event Details</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ class Dashboard extends React.Component {
 
     return (
         <div>
-            <button onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
+            <button className="btn btn-primary btn-lg" onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
             <h3>Upcoming Events</h3>
             <div className="upcomingevents row">
                 {upcominglist}

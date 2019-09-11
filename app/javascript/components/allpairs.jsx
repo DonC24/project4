@@ -26,11 +26,15 @@ class Allpairs extends React.Component {
         })
 
     return (
-        <div>
+        <div className="col-6">
             <h2>All pairs for {this.props.eventname} at {formatteddate}</h2>
-                <table>
-                    <th>Gifter</th>
-                    <th>Recipient</th>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Gifter</th>
+                            <th scope="col">Recipient</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {pairslist}
                     </tbody>

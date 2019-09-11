@@ -61,11 +61,15 @@ class Matching extends React.Component {
         })
 
     return (
-        <div>
-            <h2>{this.props.eventid}</h2>
-                <table>
-                    <th>Gifter</th>
-                    <th>Recipient</th>
+        <div className="col-6">
+            <h2>{this.props.eventname}</h2>
+                <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Gifter</th>
+                        <th scope="col">Recipient</th>
+                    </tr>
+                </thead>
                     <tbody>
                         {pairslist}
                     </tbody>
