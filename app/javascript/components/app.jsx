@@ -27,7 +27,9 @@ export default class App extends React.Component{
             pastevents: [],
             matchedperson: [],
             allpairs: [],
-            item: ''
+            item: '',
+            myitem: null,
+            recipientgift: ''
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -225,8 +227,8 @@ export default class App extends React.Component{
 
     handleDetailsClick(event){
         console.log("button clicked");
-        // console.log(this.state);
-        console.log(event.target.value);
+        console.log(this.state);
+        // console.log(event.target.value);
         let thiseventid = event.target.value;
         var reactThis = this;
 
@@ -239,9 +241,9 @@ export default class App extends React.Component{
                     console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
-                    reactThis.setState({name: response.name, eventid: response.id, eventdate: response.eventdate, notes: response.notes});
+                    reactThis.setState({name: response.event.name, eventid: response.event.id, eventdate: response.event.eventdate, notes: response.event.notes, myitem: response.wishlist});
                     // console.log(reactThis.state);
-                    reactThis.changeComponent("page5");
+                     reactThis.changeComponent("page5");
                 }
             }
         };
@@ -352,7 +354,7 @@ export default class App extends React.Component{
     } else if(this.state.currentComponent === "page4"){
         main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     } else if(this.state.currentComponent === "page5"){
-        main = <Eventdetails eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} handleWishItem={this.handleWishItem} handleWishSubmit={this.handleWishSubmit} />
+        main = <Eventdetails currentuserid={this.state.user_id} eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} handleWishItem={this.handleWishItem} handleWishSubmit={this.handleWishSubmit} myitem={this.state.myitem} />
     } else if(this.state.currentComponent === "page6"){
         main = <Allpairs allpairs={this.state.allpairs} eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} />
     }

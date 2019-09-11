@@ -12,8 +12,13 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    # @wishlist = Wishlist.where(user_id: current_user.id, event_id: params[:id])
     # @match = Match.where(sender_id: current_user.id, event_id: params[:id])
-    render :json => @event, status: :ok
+    @wishlist = Wishlist.where(event_id: params[:id])
+    # @recipientwish = Wishlist.where(user_id: @match.recipient_id, event_id: params[:id])
+
+    # render :json => @event, status: :ok
+    render :json => {:event => @event, :wishlist => @wishlist}, status: :ok
   end
 
   # GET /events/new

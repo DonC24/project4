@@ -11,11 +11,10 @@ class Eventdetails extends React.Component {
   render() {
     console.log(this.props);
 
+    let currentuser = this.props.currentuserid;
     let currenteventid = this.props.eventid;
     let matched = this.props.matchedperson;
     let allusers = this.props.allusers;
-
-
 
     let matchpersonevent = matched.find(amatch => amatch.event_id === currenteventid);
     // console.log(matchpersonevent)
@@ -38,7 +37,26 @@ class Eventdetails extends React.Component {
         durtxt = `was ${duration}`;
     }
 
+    let show='';
+    console.log(this.props.myitem);
+    let myitem = this.props.myitem
+    let hasitem = myitem.find(anitem => anitem.user_id === currentuser);
+    console.log(hasitem);
+    if(hasitem === undefined ){
+        show = <div>
+                <input name="item" type="text" onChange={(event) => {this.props.handleWishItem(event)}} />
+                <button value={currenteventid} onClick={(event) => {this.props.handleWishSubmit(event)}}>Submit</button>
+            </div>
+    } else {
+        show = <div> Your wishlist item is {hasitem.item} </div>
+    }
 
+    let gift = "";
+    let recipientItem = myitem.find(anitem => anitem.user_id === person.id);
+    if(recipientItem){
+        gift = <p>and they would like {recipientItem.item}</p>
+
+    }
 
     return (
         <div>
@@ -51,17 +69,12 @@ class Eventdetails extends React.Component {
                 <p>{this.props.eventnotes}</p>
             </div>
             <div>
-                <p>You have been matched with {person.name} ({person.email})</p>
+                <p>You have been matched with {person.name} ({person.email}) {gift}</p>
             </div>
             <div>
                 <p>Wishlist Item:</p>
             </div>
-            <div>
-                <input name="item" type="text" onChange={(event) => {this.props.handleWishItem(event)}} />
-                <button value={currenteventid} onClick={(event) => {this.props.handleWishSubmit(event)}}>Submit</button>
-            </div>
-
-
+            {show}
         </div>
     );
   }
