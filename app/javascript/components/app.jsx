@@ -26,7 +26,8 @@ export default class App extends React.Component{
             upcomingevents: [],
             pastevents: [],
             matchedperson: [],
-            allpairs: []
+            allpairs: [],
+            item: ''
         };
         this.changeComponent = this.changeComponent.bind(this);
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -39,6 +40,8 @@ export default class App extends React.Component{
         this.getData = this.getData.bind(this);
         this.handleDetailsClick = this.handleDetailsClick.bind(this);
         this.allMatchesClick = this.allMatchesClick.bind(this);
+        this.handleWishItem = this.handleWishItem.bind(this);
+        this.handleWishSubmit = this.handleWishSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -108,6 +111,41 @@ export default class App extends React.Component{
         // console.log(typeof event.target.value)
         this.setState({eventdate: input});
         console.log(this.state);
+    }
+
+    handleWishItem(event){
+        let input = event.target.value;
+        this.setState({item: input});
+        console.log(this.state);
+    }
+
+    handleWishSubmit(event){
+        console.log("button clicked");
+        // console.log(this.state);
+        // console.log(event.target.value);
+        var reactThis = this;
+
+        var responseHandler = function() {
+            console.log("in response handler");
+
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    // console.log(request.response);
+                     console.log(request.responseText);
+                    var response = JSON.parse( request.responseText );
+                    // console.log(response.id);
+                     reactThis.setState({item: ''});
+                    // console.log(reactThis.state);
+                    // reactThis.changeComponent("page3");
+                }
+            }
+        };
+        var request = new XMLHttpRequest();
+        request.addEventListener("load", responseHandler);
+        request.open("POST", "http://localhost:3000/wishlists");
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        var obj = {item: this.state.item, user_id: this.state.user_id, event_id: event.target.value};
+        request.send(JSON.stringify(obj));
     }
 
     handleEventSubmit(event){
@@ -203,7 +241,7 @@ export default class App extends React.Component{
                     //     console.log(response);
                     reactThis.setState({name: response.name, eventid: response.id, eventdate: response.eventdate, notes: response.notes});
                     // console.log(reactThis.state);
-                     reactThis.changeComponent("page5");
+                    reactThis.changeComponent("page5");
                 }
             }
         };
@@ -314,7 +352,7 @@ export default class App extends React.Component{
     } else if(this.state.currentComponent === "page4"){
         main = <Matching eventid={this.state.eventid} allusers={this.state.allusers} user_ids={this.state.user_ids} sendData={this.getData} />
     } else if(this.state.currentComponent === "page5"){
-        main = <Eventdetails eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} />
+        main = <Eventdetails eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} matchedperson={this.state.matchedperson} handleWishItem={this.handleWishItem} handleWishSubmit={this.handleWishSubmit} />
     } else if(this.state.currentComponent === "page6"){
         main = <Allpairs allpairs={this.state.allpairs} eventname={this.state.name} eventid={this.state.eventid} allusers={this.state.allusers} eventdate={this.state.eventdate} eventnotes={this.state.notes} />
     }

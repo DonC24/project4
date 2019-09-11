@@ -12,6 +12,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    # @match = Match.where(sender_id: current_user.id, event_id: params[:id])
     render :json => @event, status: :ok
   end
 
