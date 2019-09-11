@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'onepage/index'
-  devise_for :users
+  # devise_for :users
   resources :events
   get '/matches/:id' => 'matches#show'
   post '/matches' => 'matches#create'
