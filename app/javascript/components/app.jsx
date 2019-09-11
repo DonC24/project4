@@ -136,15 +136,16 @@ export default class App extends React.Component{
                      console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
-                     reactThis.setState({item: ''});
+                    reactThis.setState({item: ''});
                     // console.log(reactThis.state);
                     // reactThis.changeComponent("page3");
+
                 }
             }
         };
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("POST", "http://localhost:3000/wishlists");
+        request.open("POST", "/wishlists");
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var obj = {item: this.state.item, user_id: this.state.user_id, event_id: event.target.value};
         request.send(JSON.stringify(obj));
@@ -172,7 +173,7 @@ export default class App extends React.Component{
         };
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("POST", "http://localhost:3000/events");
+        request.open("POST", "/events");
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.send(JSON.stringify(this.state));
     }
@@ -199,7 +200,7 @@ export default class App extends React.Component{
 
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("PATCH", `http://localhost:3000/events/${this.state.eventid}`);
+        request.open("PATCH", `/events/${this.state.eventid}`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var obj = {user_ids: this.state.user_ids};
         request.send(JSON.stringify(obj));
@@ -249,7 +250,7 @@ export default class App extends React.Component{
         };
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("GET", `http://localhost:3000/events/${thiseventid}`);
+        request.open("GET", `/events/${thiseventid}`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.send();
     }
@@ -278,7 +279,7 @@ export default class App extends React.Component{
         };
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("GET", `http://localhost:3000/matches/${thiseventid}`);
+        request.open("GET", `/matches/${thiseventid}`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.send();
     }
@@ -316,7 +317,7 @@ export default class App extends React.Component{
 
         var request = new XMLHttpRequest();
         request.addEventListener("load", responseHandler);
-        request.open("POST", `http://localhost:3000/matches`);
+        request.open("POST", `/matches`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var obj = {sender_ids: sender_ids, recipient_ids: recipient_ids, event_ids: event_ids};
         console.log(obj);
