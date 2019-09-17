@@ -56,11 +56,11 @@ export default class App extends React.Component{
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     // console.log(request.response);
-                    console.log(request.responseText);
+                    // console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
                      reactThis.setState({user_id: response.user.id, allusers: response.users, upcomingevents: response.upcomingevents, pastevents: response.pastevents, matchedperson: response.matchedperson});
-                     console.log(reactThis.state);
+                    // console.log(reactThis.state);
                     // reactThis.changeComponent("page5");
                 }
             }

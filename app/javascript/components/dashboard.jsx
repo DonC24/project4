@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
         let seematched = "";
 
         let thiseventid = anevent.id;
-        console.log(thiseventid);
+        // console.log(thiseventid);
 
         if(currentuser === anevent.user_id){
             seematched = <button className="btn btn-outline-info btn-sm" value={`${thiseventid}`} onClick={(event)=>{this.props.allMatchesClick(event)}}>See list of matched persons</button>
