@@ -2,6 +2,10 @@ class OnepageController < ApplicationController
   before_action :authenticate_user!
 
   def index
+
+  end
+
+  def info
     email = current_user.email
     p email
     domain = email.split("@").last
@@ -27,5 +31,7 @@ class OnepageController < ApplicationController
 
     @current_user.sent_matches
 
+    render :json => {:user => current_user, :users => @users, :upcomingevents => @upcomingevents, :pastevents => @pastevents, :matchedperson => @current_user.sent_matches}, status: :ok
   end
+
 end

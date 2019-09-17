@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'onepage/index'
   devise_for :users
   resources :events
+  get 'onepage/info'
   get '/matches/:id' => 'matches#show'
   post '/matches' => 'matches#create'
   patch '/matches/:id' => 'matches#update'

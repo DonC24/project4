@@ -19,7 +19,6 @@ export default class App extends React.Component{
             eventdate: null,
             user_id: null,
             eventid:'',
-            emaildom: null,
             allusers: [],
             user_ids: [],
             pairs: [],
@@ -47,41 +46,31 @@ export default class App extends React.Component{
     }
 
     componentDidMount(){
-        const node = document.getElementById('currentuser');
-        const data = JSON.parse(node.getAttribute('data'));
-        console.log("inside app jsx ");
-        console.log(data);
-        let userid = data.id;
-        let useremail = data.email;
-        var emailarr = useremail.split("@");
-        let emaildom = emailarr[1];
-        // console.log(emaildom);
 
-        const allusersdiv = document.getElementById('allusers');
-        var allusersjson = JSON.parse(allusersdiv.getAttribute('data'));
-        // console.log(allusersjson);
+        let thiseventid = event.target.value;
+        var reactThis = this;
 
-        // console.log("this state allusers");
+        var responseHandler = function() {
+            console.log("in response handler");
 
-        let alluserslist = this.state.allusers;
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    // console.log(request.response);
+                    console.log(request.responseText);
+                    var response = JSON.parse( request.responseText );
+                    //     console.log(response);
+                     reactThis.setState({user_id: response.user.id, allusers: response.users, upcomingevents: response.upcomingevents, pastevents: response.pastevents, matchedperson: response.matchedperson});
+                     console.log(reactThis.state);
+                    // reactThis.changeComponent("page5");
+                }
+            }
+        };
+        var request = new XMLHttpRequest();
+        request.addEventListener("load", responseHandler);
+        request.open('GET', `/onepage/info`);
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send();
 
-        const upcomingeventsdiv = document.getElementById('upcomingevents');
-        const upcomingeventsjson = JSON.parse(upcomingeventsdiv.getAttribute('data'));
-        // console.log("upcoming events");
-        // console.log(upcomingeventsjson);
-
-        const pasteventsdiv = document.getElementById('pastevents');
-        const pasteventsjson = JSON.parse(pasteventsdiv.getAttribute('data'));
-        // console.log("past events");
-        // console.log(pasteventsjson);
-
-        const matchedpersondiv = document.getElementById('matchedperson');
-        const matchedpersonjson = JSON.parse(matchedpersondiv.getAttribute('data'));
-        // console.log("Matched person");
-        // console.log(matchedpersonjson);
-
-        this.setState({ user_id: userid, emaildom: emaildom, allusers: allusersjson, upcomingevents: upcomingeventsjson, pastevents: pasteventsjson, matchedperson: matchedpersonjson});
-        // console.log(this.state);
     }
 
     changeComponent(input){
