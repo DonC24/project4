@@ -8,6 +8,11 @@
    justify-content: space-around;
 }
 
+.createeventbtndiv {
+	display: flex;
+	justify-content: center;
+}
+
 body{
 	background: lightblue url(asset_path("backgroundimg.jpg"));
 }

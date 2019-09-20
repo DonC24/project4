@@ -90,7 +90,9 @@ class Dashboard extends React.Component {
 
     return (
         <div>
-            <button className="btn btn-primary btn-lg" onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
+            <div className="createeventbtndiv">
+                <button className="btn btn-outline-primary btn-lg createeventbtn" onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
+            </div>
             <h3>Upcoming Events</h3>
             <div className="upcomingevents row">
                 {upcominglist}

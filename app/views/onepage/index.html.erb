@@ -1,2 +1,23 @@
-
+<% if user_signed_in? %>
 <%= javascript_pack_tag 'hello_react' %>
+<% else %>
+
+
+  <div class="content lp-top-cont">
+    <section id="home">
+	      <div class="home-content">
+          <h3>Simplify your secret santa</h3>
+					<h5>No more messy drawing of lots where someone gets their own name, or forgetting the event details.<br />
+					Undercover Santa helps you set up the perfect gathering. <br />
+					Set your theme or budget for the event, <br />
+					and pair up your friends at a click of a button.</h5>
+
+        </div>
+        <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-primary' %>
+    </section>
+    <aside>
+      <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
+    </aside>
+  </div>
+
+<% end %>
