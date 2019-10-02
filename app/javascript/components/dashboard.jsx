@@ -30,8 +30,8 @@ class Dashboard extends React.Component {
             }
             return( //this only returns once per iteration of the map loop
 
-                <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 cards">
-                    <div className="card" style={{width: 18 + "rem"}}>
+                <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 cards">
+                    <div className="card" style={{width: 25 + "rem"}}>
                         <div className="card-body">
                             <h5 className="card-title">{anevent.name}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{formatteddate}</h6>
@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
 
     return (
         <div>
-            <div className="createeventbtndiv">
+            <div className="createeventbtndiv col-12">
                 <button className="btn btn-outline-primary btn-lg createeventbtn" onClick={(event) => {this.props.handleCreateEvent(event)}}>Create Event</button>
             </div>
             <h3>Upcoming Events</h3>
