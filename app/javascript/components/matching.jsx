@@ -27,7 +27,7 @@ class Matching extends React.Component {
                 }
             }
         }
-        console.log(selectedpeoplearr);
+        // console.log(selectedpeoplearr);
 
         let pairs = [];
         if (selectedpeoplearr.length > 1){
@@ -37,7 +37,7 @@ class Matching extends React.Component {
                 pairs.push([selectedpeoplearr[i - 1], selectedpeoplearr[i]]);
             }
         }
-        console.log(pairs);
+        // console.log(pairs);
         this.setState({pairs: pairs}, function() {
             this.wee()
         })
@@ -51,7 +51,7 @@ class Matching extends React.Component {
     render() {
         let pairs = this.state.pairs;
         let pairslist = pairs.map(apair => {
-            console.log(apair);
+            // console.log(apair);
             return(
                     <tr>
                         <td>{`${apair[0].name} (${apair[0].email})`}</td>

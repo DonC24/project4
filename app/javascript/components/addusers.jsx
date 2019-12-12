@@ -12,7 +12,7 @@ class AddUsers extends React.Component {
     var ReactThis = this;
 
     let userslist = alluserslist.map(oneuser => {
-        console.log(typeof oneuser.id);
+        // console.log(typeof oneuser.id);
                       return(
                         <div class="form-group form-check">
 

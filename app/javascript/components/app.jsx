@@ -117,12 +117,12 @@ export default class App extends React.Component{
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler");
+            // console.log("in response handler");
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     // console.log(request.response);
-                    console.log(request.responseText);
+                    // console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     // console.log(response.id);
                     let newarray = [...reactThis.state.myitem, response];
@@ -141,12 +141,12 @@ export default class App extends React.Component{
     }
 
     handleEventSubmit(event){
-        console.log("button clicked");
-        console.log(this.state);
+        // console.log("button clicked");
+        // console.log(this.state);
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler");
+            // console.log("in response handler");
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
@@ -168,12 +168,9 @@ export default class App extends React.Component{
     }
 
     handleUsersSubmit(event){
-        console.log("button clicked");
-        console.log(this.state);
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler: " + request.body);
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
@@ -216,14 +213,11 @@ export default class App extends React.Component{
     }
 
     handleDetailsClick(event){
-        console.log("button clicked");
-        console.log(this.state);
         // console.log(event.target.value);
         let thiseventid = event.target.value;
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler");
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
@@ -245,19 +239,16 @@ export default class App extends React.Component{
     }
 
     allMatchesClick(event){
-        console.log("button clicked");
-        // console.log(this.state);
-        console.log(event.target.value);
+        // console.log(event.target.value);
         let thiseventid = event.target.value;
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler");
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     // console.log(request.response);
-                    console.log(request.responseText);
+                    // console.log(request.responseText);
                     var response = JSON.parse( request.responseText );
                     //     console.log(response);
                     reactThis.setState({allpairs: response.matches, name: response.event.name, eventid: response.event.id, eventdate: response.event.eventdate, notes: response.event.notes});
@@ -274,8 +265,8 @@ export default class App extends React.Component{
     }
 
     getData(val) {
-        console.log("in");
-        console.log("pairs: ", val);
+        // console.log("in");
+        // console.log("pairs: ", val);
         let sender_ids=[];
         let recipient_ids=[];
         let event_ids=[];
@@ -284,13 +275,12 @@ export default class App extends React.Component{
             recipient_ids.push(val[i][1].id);
             event_ids.push(this.state.eventid);
         }
-        console.log(sender_ids);
-        console.log(recipient_ids);
+        // console.log(sender_ids);
+        // console.log(recipient_ids);
 
         var reactThis = this;
 
         var responseHandler = function() {
-            console.log("in response handler: " + request.body);
 
             if (request.readyState === 4) {
                 if (request.status === 200) {
@@ -309,7 +299,7 @@ export default class App extends React.Component{
         request.open("POST", `/matches`);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var obj = {sender_ids: sender_ids, recipient_ids: recipient_ids, event_ids: event_ids};
-        console.log(obj);
+        // console.log(obj);
         request.send(JSON.stringify(obj));
     }
 
@@ -317,7 +307,7 @@ export default class App extends React.Component{
 
 
   render(){
-    console.log("in render");
+    // console.log("in render");
 
     let main = "";
     if (this.state.currentComponent === "page1"){

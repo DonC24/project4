@@ -14,7 +14,7 @@ class Allpairs extends React.Component {
         let allusers = this.props.allusers;
         let formatteddate = Moment(this.props.eventdate).utc().format("dddd, DD MMM YY, h:mm a");
         let pairslist = allpairs.map(apair => {
-            console.log(apair);
+            // console.log(apair);
             let sender = allusers.find(aperson => aperson.id === apair.sender_id);
             let recipient = allusers.find(aperson => aperson.id === apair.recipient_id);
             return(

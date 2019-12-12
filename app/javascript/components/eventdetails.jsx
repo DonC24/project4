@@ -10,7 +10,7 @@ class Eventdetails extends React.Component {
 
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     let currentuser = this.props.currentuserid;
     let currenteventid = this.props.eventid;
@@ -29,20 +29,20 @@ class Eventdetails extends React.Component {
     let duration = ""
     let durtxt = "";
     if (now < momtdate){
-        console.log("event is after now");
+        // console.log("event is after now");
         duration = Moment(momtdate).fromNow();
         durtxt = `is ${duration}`;
     } else {
-        console.log("event has passed");
+        // console.log("event has passed");
         duration = Moment(momtdate).fromNow();
         durtxt = `was ${duration}`;
     }
 
     let show='';
-    console.log(this.props.myitem);
+    // console.log(this.props.myitem);
     let myitem = this.props.myitem
     let hasitem = myitem.find(anitem => anitem.user_id === currentuser);
-    console.log(hasitem);
+    // console.log(hasitem);
     if(hasitem === undefined ){
         show = <div className="col-5">
                 <input className="form-control" name="item" type="text" onChange={(event) => {this.props.handleWishItem(event)}} />

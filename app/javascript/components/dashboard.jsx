@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
 
 
   render() {
-    console.log("in dashboard: ");
+    // console.log("in dashboard: ");
 
 
     let upcomingevents = this.props.upcomingevents;
